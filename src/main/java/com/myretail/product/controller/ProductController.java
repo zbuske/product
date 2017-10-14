@@ -21,11 +21,7 @@ public class ProductController {
     }
 
     @RequestMapping(path = "/products/{id}", method = RequestMethod.GET)
-    public Product getById(@PathVariable("id") Long id) {
-        try {
+    public Product getById(@PathVariable("id") Long id) throws IOException {
             return productService.getProduct(id);
-        } catch (IOException e) {
-            return new Product(0, "");
-        }
     }
 }
