@@ -1,4 +1,4 @@
-package com.zbuske.product.model;
+package com.myretail.product.model;
 
 public class Price {
     public final String currencyCode;

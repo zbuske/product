@@ -1,4 +1,4 @@
-package com.zbuske.product;
+package com.myretail.product;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,15 +1,16 @@
-package com.zbuske.product.model;
+package com.myretail.product.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
     public final long id;
     public final String name;
-    public final Price price;
+    public Price price;
 
-    public Product(long id, String name, Price price) {
+    public Product(long id, String name) {
         this.id = id;
         this.name = name;
-        this.price = price;
     }
 
     public long getId() {
@@ -18,6 +19,10 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
     public Price getPrice() {
