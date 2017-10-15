@@ -1,6 +1,7 @@
 package com.myretail.product.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "productPrice")
@@ -10,6 +11,11 @@ public class ProductPrice {
     private Long productId;
     private String currencyCode;
     private Double price;
+
+    @PersistenceConstructor
+    public ProductPrice() {
+
+    }
 
     public ProductPrice(Long productId, String currencyCode, Double price) {
         this.productId = productId;

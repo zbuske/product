@@ -4,6 +4,7 @@ import com.myretail.product.domain.Product;
 import com.myretail.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +24,11 @@ public class ProductController {
     @RequestMapping(path = "/products/{id}", method = RequestMethod.GET)
     public Product getById(@PathVariable("id") Long id) throws IOException {
         return productService.getById(id);
+    }
+
+    @RequestMapping(path = "/products/{id}", method = RequestMethod.PUT)
+    public Product updateById(@RequestBody Product product) throws IOException {
+        product.setProductPrice(productService.saveOrUpdate(product.getProductPrice()));
+        return product;
     }
 }
