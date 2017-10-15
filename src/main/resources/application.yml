@@ -5,4 +5,7 @@ server:
     port: 8080
 external:
     redSkyApi: http://redsky.target.com/v2/pdp/tcin/
-    redSkyExclude: ?excludes=taxonomy,price,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics
+    redSkyExclude: ?excludes=taxonomy,productPrice,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics
+datasource:
+  mongoDbUrl: localhost
+  mongoDbName: product

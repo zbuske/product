@@ -3,7 +3,7 @@ package com.myretail.product.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myretail.product.config.ProductConfig;
-import com.myretail.product.model.Product;
+import com.myretail.product.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

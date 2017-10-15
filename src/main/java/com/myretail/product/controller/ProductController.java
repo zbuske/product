@@ -1,6 +1,6 @@
 package com.myretail.product.controller;
 
-import com.myretail.product.model.Product;
+import com.myretail.product.domain.Product;
 import com.myretail.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +22,6 @@ public class ProductController {
 
     @RequestMapping(path = "/products/{id}", method = RequestMethod.GET)
     public Product getById(@PathVariable("id") Long id) throws IOException {
-            return productService.getProduct(id);
+        return productService.getById(id);
     }
 }

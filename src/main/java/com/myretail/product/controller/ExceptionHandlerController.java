@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,14 +15,18 @@ public class ExceptionHandlerController {
 
     // When the RedSky API is called, and there is no product matching the Product id,
     // it throws a HttpClientErrorException with a 404 status.
+    // Getting the status from the exception in case it's not a 404.
     @ExceptionHandler(HttpClientErrorException.class)
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ResponseBody
-    public void requestHandlingNoHandlerFound(HttpServletRequest request, HttpClientErrorException e) {
+    public ModelAndView requestHandlingNoHandlerFound(HttpServletRequest request, HttpClientErrorException e) {
+        ModelAndView mav = new ModelAndView();
+        mav.setStatus(e.getStatusCode());
+
+        return mav;
     }
 
     // If this was a production system, I'd fill out the exception handling more.
-    // Just catching everything else for now.
+    // Just catching everything else for now and calling it a server error.
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody

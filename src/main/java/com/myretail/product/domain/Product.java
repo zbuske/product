@@ -1,12 +1,9 @@
-package com.myretail.product.model;
+package com.myretail.product.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
-    public Long id;
-    public String name;
-    public Price price;
+    private Long id;
+    private String name;
+    private ProductPrice productPrice;
 
     public Product(long id, String name) {
         this.id = id;
@@ -29,12 +26,12 @@ public class Product {
         this.name = name;
     }
 
-    public Price getPrice() {
-        return price;
+    public ProductPrice getProductPrice() {
+        return productPrice;
     }
 
-    public void setPrice(Price price) {
-        this.price = price;
+    public void setProductPrice(ProductPrice productPrice) {
+        this.productPrice = productPrice;
     }
 
     @Override
@@ -46,14 +43,14 @@ public class Product {
 
         if (id != null ? !id.equals(product.id) : product.id != null) return false;
         if (name != null ? !name.equals(product.name) : product.name != null) return false;
-        return price != null ? price.equals(product.price) : product.price == null;
+        return productPrice != null ? productPrice.equals(product.productPrice) : product.productPrice == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (productPrice != null ? productPrice.hashCode() : 0);
         return result;
     }
 
@@ -62,7 +59,7 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", price=" + price +
+                ", productPrice=" + productPrice +
                 '}';
     }
 }
