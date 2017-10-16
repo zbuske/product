@@ -11,7 +11,7 @@ The pricing data comes from an embedded Mongo databse. Because it is a POC,
 and the Mongo database is embedded, any modified data will be lost when the application terminates.
 It is only meant for testing at this point. 
 
-###Installation
+### Installation
 
 * Clone this repo to your local computer
 * cd into the repo directory
@@ -30,11 +30,11 @@ There are two endpoints to the service. The both have the following url"
 
 `http://localhost:8080/com/myretail/products/${id}`
 
-##### GET request.  
+#### GET request.  
 This will retieve a single product by its id. 
 
 You can run that from any browser with the URL and product id.
-##### PUT request. 
+#### PUT request. 
 This will update any fields in the ProductPrice that hav changed.
  
 In addition to the  URL you will need a json payload. 
@@ -55,7 +55,7 @@ Because the Mongo database reloads each time the application starts, it's import
 The mongo id for the ProductPrice will change each time the application is started. You can use the json from the GET to do the PUT, 
 changing the price values you would like to update.
 
-###Valid Product Ids
+### Valid Product Ids
 Only two of the product ids in the exercise description returned product data. I found a few more by trying the next and previous ones in sequence. This is the list of product ids supported by this application.
 
 (The pricing data will not be available for any others, but you could add it with a PUT)
