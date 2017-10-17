@@ -21,6 +21,7 @@ public class ProductService {
     }
 
     public Product getById(Long id) throws IOException {
+        //TODO: What should happen if a name isn't found
         Product product = productDataService.getProduct(id);
         product.setProductPrice(priceRepository.findByProductId(id));
         return product;

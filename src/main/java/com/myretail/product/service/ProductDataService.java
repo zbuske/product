@@ -24,9 +24,13 @@ public class ProductDataService {
         RestTemplate restTemplate = new RestTemplate();
         String url = productConfig.getRedSkyApi() + id + productConfig.getRedSkyExclude();
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+        String name = getNameFromResponse(response);
+        return new Product(id, name);
+    }
+
+    protected String getNameFromResponse(ResponseEntity<String> response) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode product = mapper.readTree(response.getBody());
-        String name = product.path("product").path("item").path("product_description").path("title").textValue();
-        return new Product(id, name);
+        return product.path("product").path("item").path("product_description").path("title").textValue();
     }
 }
