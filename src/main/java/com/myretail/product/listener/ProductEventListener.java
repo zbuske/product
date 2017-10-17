@@ -28,9 +28,9 @@ public class ProductEventListener {
     @EventListener
     public void onApplicationEvent(ApplicationReadyEvent event) {
         //Of the sample tcins provided, only 2 returned product data
-        //•	Example product IDs: 15117729-n, 16483589-n, 16696652-y, 16752456-n, 15643793-n)
+        //•	Example product IDs: 13860428-y, 15117729-n, 16483589-n, 16696652-y, 16752456-n, 15643793-n)
         // I found 4 more by trying values in sequence with the 2 that worked.
-        //13860428, 13860427, 13860429, 16696652, 16696651, 16696650
+        // 13860428, 13860427, 13860429, 16696652, 16696651, 16696650
         Map<Long, Double> priceMap = Collections.unmodifiableMap(Stream.of(
                 new SimpleEntry<>(13860428L, 12.99),
                 new SimpleEntry<>(13860427L, 35.00),

@@ -16,16 +16,8 @@ public class MongoConfig {
     private String mongoDbUrl;
     private String mongoDbName;
 
-    public String getMongoDbUrl() {
-        return mongoDbUrl;
-    }
-
     public void setMongoDbUrl(String mongoDbUrl) {
         this.mongoDbUrl = mongoDbUrl;
-    }
-
-    public String getMongoDbName() {
-        return mongoDbName;
     }
 
     public void setMongoDbName(String mongoDbName) {

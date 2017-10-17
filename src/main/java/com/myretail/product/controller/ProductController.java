@@ -28,8 +28,8 @@ public class ProductController {
 
     @RequestMapping(path = "/products/{id}", method = RequestMethod.PUT)
     public Product updateById(@RequestBody Product product, @PathVariable("id") Long id) throws IOException {
-        //TODO: Determine what should happen if the id parameter doesn't match the id in the product.
-        product.setProductPrice(productService.saveOrUpdate(product.getProductPrice()));
+        // TODO: Determine what should happen if the id parameter doesn't match the id in the product (we don't really need both)
+        product.setProductPrice(productService.saveOrUpdatePriceInfo(product));
         return product;
     }
 }

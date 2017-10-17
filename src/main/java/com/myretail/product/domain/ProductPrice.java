@@ -10,17 +10,17 @@ public class ProductPrice {
     private String id;
     private Long productId;
     private String currencyCode;
-    private Double price;
+    private Double value;
 
     @PersistenceConstructor
     public ProductPrice() {
 
     }
 
-    public ProductPrice(Long productId, String currencyCode, Double price) {
+    public ProductPrice(Long productId, String currencyCode, Double value) {
         this.productId = productId;
         this.currencyCode = currencyCode;
-        this.price = price;
+        this.value = value;
     }
 
     public String getId() {
@@ -47,12 +47,12 @@ public class ProductPrice {
         this.currencyCode = currencyCode;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getValue() {
+        return value;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setValue(Double value) {
+        this.value = value;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ProductPrice {
             return false;
         if (currencyCode != null ? !currencyCode.equals(productPrice1.currencyCode) : productPrice1.currencyCode != null)
             return false;
-        return price != null ? price.equals(productPrice1.price) : productPrice1.price == null;
+        return value != null ? value.equals(productPrice1.value) : productPrice1.value == null;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class ProductPrice {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (productId != null ? productId.hashCode() : 0);
         result = 31 * result + (currencyCode != null ? currencyCode.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (value != null ? value.hashCode() : 0);
         return result;
     }
 
@@ -83,7 +83,7 @@ public class ProductPrice {
     public String toString() {
         return "ProductPrice{" +
                 ", currencyCode='" + currencyCode + '\'' +
-                ", productPrice=" + price +
+                ", productPrice=" + value +
                 '}';
     }
 }

@@ -23,11 +23,25 @@ public class ProductService {
     public Product getById(Long id) throws IOException {
         //TODO: What should happen if a name isn't found
         Product product = productDataService.getProduct(id);
+        //TODO: What should happen if a price isn't found
         product.setProductPrice(priceRepository.findByProductId(id));
         return product;
     }
 
-    public ProductPrice saveOrUpdate(ProductPrice productPrice) {
-        return priceRepository.save(productPrice);
+    public ProductPrice saveOrUpdatePriceInfo(Product product) {
+        // Because the mongo id may have changed, get the one from  the datastore,
+        // if it exists, update it, and use that one. Otherwise we won't persist the data properly.
+        setUpdatablePrice(product);
+        return priceRepository.save(product.getProductPrice());
+
+    }
+
+    protected void setUpdatablePrice(Product product) {
+        ProductPrice currentPrice = priceRepository.findByProductId(product.getId());
+        if (currentPrice != null) {
+            currentPrice.setCurrencyCode(product.getProductPrice().getCurrencyCode());
+            currentPrice.setValue(product.getProductPrice().getValue());
+            product.setProductPrice(currentPrice);
+        }
     }
 }

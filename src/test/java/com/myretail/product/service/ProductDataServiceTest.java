@@ -5,15 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.client.MockRestServiceServer;
 
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
 public class ProductDataServiceTest {
-    private MockRestServiceServer mockServer;
-    ProductDataService productDataService;
+    private ProductDataService productDataService;
 
     @Before
     public void init() {
@@ -22,7 +20,6 @@ public class ProductDataServiceTest {
 
     @Test
     public void getNameFromResponse() throws Exception {
-        Long id = 1L;
         String responseBody = "{\"product\":{\"deep_red_labels\":{\"total_count\":2,"
                 + "\"labels\":[{\"id\":\"gqwm8i\",\"name\":\"TAC\",\"type\":\"relationship type\","
                 + "\"priority\":0,\"count\":1},{\"id\":\"twbl94\",\"name\":\"Movies\",\"type\":\"merchandise type\","
@@ -33,9 +30,9 @@ public class ProductDataServiceTest {
                 + "\"availability_status\":\"OUT_OF_STOCK\",\"multichannel_options\":[\"HOLD\"],"
                 + "\"is_infinite_inventory\":false,\"loyalty_availability_status\":\"OUT_OF_STOCK\","
                 + "\"loyalty_purchase_start_date_time\":\"1970-01-01T00:00:00.000Z\",\"is_loyalty_purchase_enabled\":false},"
-                + "\"price\":{\"partNumber\":\"13860428\",\"channelAvailability\":\"0\","
-                + "\"listPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"price\":19.98,\"formattedPrice\":\"$19.98\","
-                + "\"priceType\":\"MSRP\",\"null\":false},\"offerPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"price\":14.99,"
+                + "\"value\":{\"partNumber\":\"13860428\",\"channelAvailability\":\"0\","
+                + "\"listPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"value\":19.98,\"formattedPrice\":\"$19.98\","
+                + "\"priceType\":\"MSRP\",\"null\":false},\"offerPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"value\":14.99,"
                 + "\"formattedPrice\":\"$14.99\",\"priceType\":\"Reg\",\"startDate\":1498374000000,\"endDate\":253402236000000,"
                 + "\"saveDollar\":\"4.99\",\"savePercent\":\"25\",\"eyebrow\":\"\",\"null\":false},"
                 + "\"ppu\":\"\",\"mapPriceFlag\":\"N\"},\"item\":{\"tcin\":\"13860428\","
@@ -75,7 +72,6 @@ public class ProductDataServiceTest {
 
     @Test
     public void getNameFromResponseNoName() throws Exception {
-        Long id = 1L;
         String responseBody = "{\"product\":{\"deep_red_labels\":{\"total_count\":2,"
                 + "\"labels\":[{\"id\":\"gqwm8i\",\"name\":\"TAC\",\"type\":\"relationship type\","
                 + "\"priority\":0,\"count\":1},{\"id\":\"twbl94\",\"name\":\"Movies\",\"type\":\"merchandise type\","
@@ -86,9 +82,9 @@ public class ProductDataServiceTest {
                 + "\"availability_status\":\"OUT_OF_STOCK\",\"multichannel_options\":[\"HOLD\"],"
                 + "\"is_infinite_inventory\":false,\"loyalty_availability_status\":\"OUT_OF_STOCK\","
                 + "\"loyalty_purchase_start_date_time\":\"1970-01-01T00:00:00.000Z\",\"is_loyalty_purchase_enabled\":false},"
-                + "\"price\":{\"partNumber\":\"13860428\",\"channelAvailability\":\"0\","
-                + "\"listPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"price\":19.98,\"formattedPrice\":\"$19.98\","
-                + "\"priceType\":\"MSRP\",\"null\":false},\"offerPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"price\":14.99,"
+                + "\"value\":{\"partNumber\":\"13860428\",\"channelAvailability\":\"0\","
+                + "\"listPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"value\":19.98,\"formattedPrice\":\"$19.98\","
+                + "\"priceType\":\"MSRP\",\"null\":false},\"offerPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"value\":14.99,"
                 + "\"formattedPrice\":\"$14.99\",\"priceType\":\"Reg\",\"startDate\":1498374000000,\"endDate\":253402236000000,"
                 + "\"saveDollar\":\"4.99\",\"savePercent\":\"25\",\"eyebrow\":\"\",\"null\":false},"
                 + "\"ppu\":\"\",\"mapPriceFlag\":\"N\"},\"item\":{\"tcin\":\"13860428\","
@@ -117,14 +113,13 @@ public class ProductDataServiceTest {
                 + "\"return_policies\":{\"user\":\"Regular Guest\",\"policyDays\":\"30\","
                 + "\"guestMessage\":\"This item must be returned within 30 days of the ship date. See return policy for details.\"},"
                 + "\"gifting_enabled\":false,\"notify_me_enabled\":true}}}";
-        ResponseEntity<String> responseEntity = new ResponseEntity<String>(responseBody, HttpStatus.OK);
+        ResponseEntity<String> responseEntity = new ResponseEntity<>(responseBody, HttpStatus.OK);
         String name = productDataService.getNameFromResponse(responseEntity);
         assertEquals(null, name);
     }
 
     @Test(expected = IOException.class)
     public void getNameFromResponseBadJson() throws Exception {
-        Long id = 1L;
         String responseBody = "{\"product\":{\"deep_red_labels\":{\"total_count\":2,"
                 + "\"labels\":[{\"id\":\"gqwm8i\",\"name\":\"TAC\",\"type\":\"relationship type\","
                 + "\"priority\":0,\"count\":1},{\"id\":\"twbl94\",\"name\":\"Movies\",\"type\":\"merchandise type\","
@@ -135,9 +130,9 @@ public class ProductDataServiceTest {
                 + "\"availability_status\":\"OUT_OF_STOCK\",\"multichannel_options\":[\"HOLD\"],"
                 + "\"is_infinite_inventory\":false,\"loyalty_availability_status\":\"OUT_OF_STOCK\","
                 + "\"loyalty_purchase_start_date_time\":\"1970-01-01T00:00:00.000Z\",\"is_loyalty_purchase_enabled\":false},"
-                + "\"price\":{\"partNumber\":\"13860428\",\"channelAvailability\":\"0\","
-                + "\"listPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"price\":19.98,\"formattedPrice\":\"$19.98\","
-                + "\"priceType\":\"MSRP\",\"null\":false},\"offerPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"price\":14.99,"
+                + "\"value\":{\"partNumber\":\"13860428\",\"channelAvailability\":\"0\","
+                + "\"listPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"value\":19.98,\"formattedPrice\":\"$19.98\","
+                + "\"priceType\":\"MSRP\",\"null\":false},\"offerPrice\":{\"minPrice\":0.0,\"maxPrice\":0.0,\"value\":14.99,"
                 + "\"formattedPrice\":\"$14.99\",\"priceType\":\"Reg\",\"startDate\":1498374000000,\"endDate\":253402236000000,"
                 + "\"saveDollar\":\"4.99\",\"savePercent\":\"25\",\"eyebrow\":\"\",\"null\":false},"
                 + "\"ppu\":\"\",\"mapPriceFlag\":\"N\"},\"item\":{\"tcin\":\"13860428\","

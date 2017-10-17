@@ -21,15 +21,20 @@ public class ProductServiceTest {
     ProductDataService productDataService;
 
     ProductService productService;
+    ProductPrice productPrice;
+    Long id = 1L;
+    String productPriceId = "5678";
 
     @Before
     public void init() {
         productService = new ProductService(productDataService, priceRepository);
+        productPrice = new ProductPrice(id, "USD", 29.99);
+        productPrice.setId(productPriceId);
+
     }
 
     @Test
     public void getById() throws Exception {
-        Long id = 1L;
         String name = "foo";
         Product product = new Product(id, name);
         ProductPrice productPrice = new ProductPrice(id, "USD", 29.99);
@@ -41,4 +46,43 @@ public class ProductServiceTest {
         product.setProductPrice(productPrice);
         assertEquals(product, result);
     }
+
+    @Test
+    public void setUpdatablePriceExisting() {
+        Product product = new Product(id, "foo");
+        product.setProductPrice(productPrice);
+
+
+        String currencyCode = "AUD";
+        Double value = 13.50;
+        ProductPrice existingProductPrice = new ProductPrice(id, currencyCode, value);
+        existingProductPrice.setId("1234");
+
+        when(priceRepository.findByProductId(id)).thenReturn(existingProductPrice);
+
+        productService.setUpdatablePrice(product);
+
+        assertEquals(existingProductPrice.getId(), product.getProductPrice().getId());
+        assertEquals(existingProductPrice.getProductId(), product.getProductPrice().getProductId());
+        assertEquals(productPrice.getProductId(), product.getProductPrice().getProductId());
+        assertEquals(productPrice.getCurrencyCode(), product.getProductPrice().getCurrencyCode());
+        assertEquals(productPrice.getValue(), product.getProductPrice().getValue());
+    }
+
+    @Test
+    public void setUpdatablePriceNew() {
+        Product product = new Product(id, "foo");
+        product.setProductPrice(productPrice);
+
+
+        when(priceRepository.findByProductId(id)).thenReturn(null);
+
+        productService.setUpdatablePrice(product);
+
+        assertEquals(productPrice.getId(), product.getProductPrice().getId());
+        assertEquals(productPrice.getProductId(), product.getProductPrice().getProductId());
+        assertEquals(productPrice.getCurrencyCode(), product.getProductPrice().getCurrencyCode());
+        assertEquals(productPrice.getValue(), product.getProductPrice().getValue());
+    }
+
 }

@@ -3,13 +3,14 @@
 The Product service can retrieve data, or update pricing data, for a specified product, This data includes
 * id
 * name
-* currency 
+* currency code
 * value (price)
 
 It is built using Spring Boot. The product data comes from an external API. 
-The pricing data comes from an embedded Mongo databse. Because it is a POC, 
+The pricing data comes from a Mongo databse. Because it is a POC, 
 and the Mongo database is embedded, any modified data will be lost when the application terminates.
-It is only meant for testing at this point. 
+It is only meant for testing at this point. I would use profiles. in application.yml for setting the database 
+configurartion in a production system.
 
 ### Installation
 
@@ -35,14 +36,14 @@ This will retieve a single product by its id.
 
 You can run that from any browser with the URL and product id.
 #### PUT request. 
-This will update any fields in the ProductPrice that hav changed.
+This will update the currency code and value in the ProductPrice that have changed. or create a new ProductPrice if it doesn't exist.
  
 In addition to the  URL you will need a json payload. 
 These are two ways of doing that:
 
 * **Curl** (substitute the json with what you want to post)
  
- `curl -H 'Content-Type: application/json' -X PUT -d '{"id": 13860428,"name": "The Big Lebowski (Blu-ray)","productPrice": { "id": "59e3b1fde6ca77286b82c7de","productId": 16696652,"currencyCode": "USD","price": 13.99}}' http://localhost:8080/com/myretail/products/13860429`
+ `curl -H 'Content-Type: application/json' -X PUT -d '{"id": 13860428,"name": "The Big Lebowski (Blu-ray)","productPrice": { "id": "59e3b1fde6ca77286b82c7de","productId": 16696652,"currencyCode": "USD","value": 13.99}}' http://localhost:8080/com/myretail/products/13860429`
     
 * **Postman**  
     * Choose a new PUT request
@@ -51,14 +52,16 @@ These are two ways of doing that:
     * Click Send
 
 #### Note
-Because the Mongo database reloads each time the application starts, it's important to go a GET before a PUT. 
-The mongo id for the ProductPrice will change each time the application is started. You can use the json from the GET to do the PUT, 
-changing the price values you would like to update.
+To get the json format you need you can do  do a GET before a PUT. 
+You can then use the json from the GET to do the PUT, 
+changing the values you would like to update. You can reuse that json.
 
 ### Valid Product Ids
-Only two of the product ids in the exercise description returned product data. I found a few more by trying the next and previous ones in sequence. This is the list of product ids supported by this application.
+Only two of the product ids in the exercise description returned product data. 
+I found a few more by trying the next and previous ones in sequence. 
+This is the list of product ids supported by this application.
 
-(The pricing data will not be available for any others, but you could add it with a PUT)
+(The pricing data will not be available for any others that may return a product, but you could add it with a PUT)
 
 13860428
 13860427

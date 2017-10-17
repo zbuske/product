@@ -37,10 +37,10 @@ public class ProductPriceRepositoryTest {
         assertNotNull(productPrice1);
         assertEquals(new Long(1234), productPrice1.getProductId());
         assertEquals("USD", productPrice1.getCurrencyCode());
-        assertEquals(new Double(29.99), productPrice1.getPrice());
+        assertEquals(new Double(29.99), productPrice1.getValue());
         assertEquals(new Long(5678), productPrice2.getProductId());
         assertEquals("USD", productPrice2.getCurrencyCode());
-        assertEquals(new Double(13.50), productPrice2.getPrice());
+        assertEquals(new Double(13.50), productPrice2.getValue());
         assertNull(productPrice3);
     }
 }
