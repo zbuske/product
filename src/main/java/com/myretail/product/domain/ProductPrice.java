@@ -1,5 +1,6 @@
 package com.myretail.product.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -7,7 +8,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "productPrice")
 public class ProductPrice {
     @Id
+    @JsonIgnore
     private String id;
+    @JsonIgnore
     private Long productId;
     private String currencyCode;
     private Double value;

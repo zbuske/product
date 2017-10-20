@@ -43,7 +43,7 @@ These are two ways of doing that:
 
 * **Curl** (substitute the json with what you want to post)
  
- `curl -H 'Content-Type: application/json' -X PUT -d '{"id": 13860428,"name": "The Big Lebowski (Blu-ray)","productPrice": { "id": "59e3b1fde6ca77286b82c7de","productId": 16696652,"currencyCode": "USD","value": 13.99}}' http://localhost:8080/com/myretail/products/13860429`
+ `curl -H 'Content-Type: application/json' -X PUT -d '{"id": 13860428,"name": "The Big Lebowski (Blu-ray)","productPrice": {"currencyCode": "USD","value": 13.99}}`
     
 * **Postman**  
     * Choose a new PUT request
