@@ -23,6 +23,8 @@ configurartion in a production system.
 There are two ways to run the application from the commandline
  * `./gradlew bootRun`
  * `java -jar build/libs/product-0.0.1-SNAPSHOT.jar`
+ 
+(The first time you run it, it will download the embedded mongo dpendency. This may take some time.) 
 
 
 ### Using the Service
